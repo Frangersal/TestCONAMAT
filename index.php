@@ -5,13 +5,13 @@ $unixtime = time();
 
 
 
-if ($_SESSION['sesionalumno'] != "") {
+if (isset($_SESSION['sesionalumno']) && $_SESSION['sesionalumno'] != "") {
     
     //header("Location: plataformaeducativa/");
 
 }
 
-if($_SESSION['sesionmaestro'] != "") {
+if(isset($_SESSION['sesionmaestro']) && $_SESSION['sesionmaestro'] != "") {
 	
 	
 }
@@ -93,8 +93,8 @@ if ($_POST) {
 
 }
 
-$matricula = $_SESSION['sesionalumno'];
-$usuariomaestro = $_SESSION['sesionmaestro'];
+$matricula = isset($_SESSION['sesionalumno']) ? $_SESSION['sesionalumno'] : "";
+$usuariomaestro = isset($_SESSION['sesionmaestro']) ? $_SESSION['sesionmaestro'] : "";
 
 mysql_select_db($database_conamatenlinea, $conamatenlinea);
 $query_Recordset1 = "SELECT * FROM cursos";
@@ -453,24 +453,25 @@ p{
 			$(this).animate({ backgroundColor: 'rgba(0,0,0,0.6);'}, 'fast');
 		});	
 		
-	<?php if ($_SESSION['sesionalumno'] == "" || $_SESSION['sesionmaestro'] == "") { ?>
+	<?php if ((!isset($_SESSION['sesionalumno']) || $_SESSION['sesionalumno'] == "") && (!isset($_SESSION['sesionmaestro']) || $_SESSION['sesionmaestro'] == "")) { ?>
 	
 		$("#login").show();
 		$("#menuplataformaalumno").hide();
 		$("#menuplataformamaestro").hide();
 		
-	<?php } else if ($_SESSION['sesionalumno'] != "") { ?>
+	<?php } else if (isset($_SESSION['sesionalumno']) && $_SESSION['sesionalumno'] != "") { ?>
 		
 		$("#menuplataformaalumno").show();
 		$("#login").hide();
 		$("#menuplataformamaestro").hide();
 		
-	<?php } else if ($_SESSION['sesionmaestro'] != "") ?>
+	<?php } else if (isset($_SESSION['sesionmaestro']) && $_SESSION['sesionmaestro'] != "") { ?>
 		
 		$("#menuplataformamaestro").show();
 		$("#menuplataformaalumno").hide();
 		$("#login").hide(); 
 		
+    <?php } ?>
     });
 	
 function validaenvia() {
@@ -536,7 +537,7 @@ $( "#menudesplegable" ).animate({
 
         <a href="javascript:void(0);" onclick="javascript:menumovil();" id="menumovil" style="display: none; padding: 10px; position: relative; z-index: 1; float: right; margin-top: 10px; margin-right: 10px;">
 
-            <img src="../images/menumovil.png" style="height: 40px;" alt="">
+            <img src="images/menumovil.png" style="height: 40px;" alt="">
 
         </a>
 
@@ -544,11 +545,11 @@ $( "#menudesplegable" ).animate({
 
             <a href="javascript:void(0);" onclick="javascript:cerrarmenumovil();" style="float: right; padding: 5px;">
 
-                <img id="cerrar" style="height: 30px; float: right;" src="../images/x.png" alt="">
+                <img id="cerrar" style="height: 30px; float: right;" src="images/x.png" alt="">
 
             </a>
 
-            <img src="../images/logotipoazul.png?id=<?php echo $unixtime; ?>" style="width: 90%; margin-left: 5%; margin-top: 30px; margin-bottom: 30px;" alt="">
+            <img src="images/logotipoazul.png?id=<?php echo $unixtime; ?>" style="width: 90%; margin-left: 5%; margin-top: 30px; margin-bottom: 30px;" alt="">
 
             <a class="menunav" style="background-color: #afa496; border-top: 1px solid rgba(244,244,244,0.5);">INICIO</a>
 
@@ -632,7 +633,7 @@ $( "#menudesplegable" ).animate({
             
             	<div class="contenedoricon" style="width: 13px; margin-top: 12px; float: left;">
             	
-					<img class="opcionicon" src="../images/plataformausuario.png?id=<?php echo $unixtime; ?>" style="width: 100%; float: left;" />
+					<img class="opcionicon" src="images/plataformausuario.png?id=<?php echo $unixtime; ?>" style="width: 100%; float: left;" />
 					
 				</div>
             
@@ -651,7 +652,7 @@ $( "#menudesplegable" ).animate({
 					<div class="contenedoropcion" style="width: calc(100% - 30px); padding-left: 15px; padding-right: 15px; padding-top: 10px; overflow: hidden;">
 
 						<div class="contenedoricon" style="width: 17px; height: 16px; position: absolute; margin-right: 10px; float: left;">
-							<img class="opcionicon" src="../images/plataformainicio.png?id=<?php echo $unixtime; ?>" style="width: 100%; position: absolute;" />
+							<img class="opcionicon" src="images/plataformainicio.png?id=<?php echo $unixtime; ?>" style="width: 100%; position: absolute;" />
 						</div>
 				
 						<div class="nombreopcion" style="font-family: 'Montserrat', sans-serif; color: #4d5b71; padding-left: 30px; padding-right: 20px; font-size: 14px; letter-spacing: 1px; margin-bottom: 10px; float: left; text-transform: uppercase;  overflow: hidden; padding-bottom: 3px;">Inicio</div>
@@ -669,7 +670,7 @@ $( "#menudesplegable" ).animate({
 					<div class="contenedoropcion" style="padding-left: 15px; padding-right: 15px; padding-top: 10px; overflow: hidden;">
 
 						<div class="contenedoricon" style="width: 17px; height: 16px; position: absolute; margin-right: 10px; float: left;">
-							<img class="opcionicon" src="../images/plataformaconfiguracion.png?id=<?php echo $unixtime; ?>" style="width: 100%; position: absolute;" />
+							<img class="opcionicon" src="images/plataformaconfiguracion.png?id=<?php echo $unixtime; ?>" style="width: 100%; position: absolute;" />
 						</div>
 				
 						<div class="nombreopcion" style="font-family: 'Montserrat', sans-serif; color: #4d5b71; padding-left: 30px; padding-right: 20px; font-size: 14px; letter-spacing: 1px; margin-bottom: 10px; float: left; text-transform: uppercase;  overflow: hidden; padding-bottom: 3px;">Configuración</div>
@@ -688,7 +689,7 @@ $( "#menudesplegable" ).animate({
 					<div class="contenedoropcion" style="width: calc(100% - 30px); padding-left: 15px; padding-right: 15px; padding-top: 10px; overflow: hidden;">
 
 						<div class="contenedoricon" style="width: 17px; height: 16px; position: absolute; margin-right: 10px; float: left;">
-							<img class="opcionicon" src="../images/plataformapagos.png?id=<?php echo $unixtime; ?>" style="width: 100%; position: absolute;" />
+							<img class="opcionicon" src="images/plataformapagos.png?id=<?php echo $unixtime; ?>" style="width: 100%; position: absolute;" />
 						</div>
 				
 						<div class="nombreopcion" style="font-family: 'Montserrat', sans-serif; color: #4d5b71; padding-left: 30px; padding-right: 20px; font-size: 14px; letter-spacing: 1px; margin-bottom: 10px; float: left; text-transform: uppercase;  overflow: hidden; padding-bottom: 3px;">Pagos</div>
@@ -707,7 +708,7 @@ $( "#menudesplegable" ).animate({
 					<div class="contenedoropcion" style="padding-left: 15px; padding-right: 15px; padding-top: 10px; overflow: hidden;">
 
 						<div class="contenedoricon" style="width: 17px; height: 16px; position: absolute; margin-right: 10px; float: left;">
-							<img class="opcionicon" src="../images/plataformacurso.png?id=<?php echo $unixtime; ?>" style="width: 100%; position: absolute;" />
+							<img class="opcionicon" src="images/plataformacurso.png?id=<?php echo $unixtime; ?>" style="width: 100%; position: absolute;" />
 						</div>
 				
 						<div class="nombreopcion" style="font-family: 'Montserrat', sans-serif; color: #4d5b71; padding-left: 30px; padding-right: 20px; font-size: 14px; letter-spacing: 1px; margin-bottom: 10px; float: left; text-transform: uppercase;  overflow: hidden; padding-bottom: 3px;">Curso</div>
@@ -726,7 +727,7 @@ $( "#menudesplegable" ).animate({
 					<div class="contenedoropcion" style="padding-left: 15px; padding-right: 15px; padding-top: 10px; overflow: hidden;">
 
 						<div class="contenedoricon" style="width: 17px; height: 16px; position: absolute; margin-right: 10px; float: left;">
-							<img class="opcionicon" src="../images/plataformabiblioteca.png?id=<?php echo $unixtime; ?>" style="width: 100%; position: absolute;" />
+							<img class="opcionicon" src="images/plataformabiblioteca.png?id=<?php echo $unixtime; ?>" style="width: 100%; position: absolute;" />
 						</div>
 				
 						<div class="nombreopcion" style="font-family: 'Montserrat', sans-serif; color: #4d5b71; padding-left: 30px; padding-right: 20px; font-size: 14px; letter-spacing: 1px; margin-bottom: 10px; float: left; text-transform: uppercase;  overflow: hidden; padding-bottom: 3px;">Biblioteca</div>
@@ -744,7 +745,7 @@ $( "#menudesplegable" ).animate({
 					<div class="contenedoropcion" style="padding-left: 15px; padding-right: 15px; padding-top: 10px; overflow: hidden;">
 
 						<div class="contenedoricon" style="width: 17px; height: 16px; position: absolute; margin-right: 10px; float: left;">
-							<img class="opcionicon" src="../images/plataformaayuda.png?id=<?php echo $unixtime; ?>" style="width: 100%; position: absolute;" />
+							<img class="opcionicon" src="images/plataformaayuda.png?id=<?php echo $unixtime; ?>" style="width: 100%; position: absolute;" />
 						</div>
 				
 						<div class="nombreopcion" style="font-family: 'Montserrat', sans-serif; color: #4d5b71; padding-left: 30px; padding-right: 20px; font-size: 14px; letter-spacing: 1px; margin-bottom: 10px; float: left; text-transform: uppercase;  overflow: hidden; padding-bottom: 3px;">Ayuda</div>
@@ -763,7 +764,7 @@ $( "#menudesplegable" ).animate({
 					<div class="contenedoropcion" style="width: calc(100% - 30px); padding-left: 15px; padding-right: 15px; padding-top: 10px; overflow: hidden;">
 
 						<div class="contenedoricon" style="width: 17px; height: 16px; position: absolute; margin-right: 10px; float: left;">
-							<img class="opcionicon" src="../images/plataformasalir.png?id=<?php echo $unixtime; ?>" style="width: 100%; position: absolute;" />
+							<img class="opcionicon" src="images/plataformasalir.png?id=<?php echo $unixtime; ?>" style="width: 100%; position: absolute;" />
 						</div>
 				
 						<div class="nombreopcion" style="font-family: 'Montserrat', sans-serif; color: #4d5b71; padding-left: 30px; padding-right: 20px; font-size: 14px; letter-spacing: 1px; margin-bottom: 10px; float: left; text-transform: uppercase;  overflow: hidden; padding-bottom: 3px;">Salir</div>
@@ -788,7 +789,7 @@ $( "#menudesplegable" ).animate({
             
             	<div class="contenedoricon" style="width: 13px; margin-top: 12px; float: left;">
             	
-					<img class="opcionicon" src="../images/plataformausuario.png?id=<?php echo $unixtime; ?>" style="width: 100%; float: left;" />
+					<img class="opcionicon" src="images/plataformausuario.png?id=<?php echo $unixtime; ?>" style="width: 100%; float: left;" />
 					
 				</div>
             
@@ -807,7 +808,7 @@ $( "#menudesplegable" ).animate({
 					<div class="contenedoropcion" style="width: calc(100% - 30px); padding-left: 15px; padding-right: 15px; padding-top: 10px; overflow: hidden;">
 
 						<div class="contenedoricon" style="width: 17px; height: 16px; position: absolute; margin-right: 10px; float: left;">
-							<img class="opcionicon" src="../images/plataformainicio.png?id=<?php echo $unixtime; ?>" style="width: 100%; position: absolute;" />
+							<img class="opcionicon" src="images/plataformainicio.png?id=<?php echo $unixtime; ?>" style="width: 100%; position: absolute;" />
 						</div>
 				
 						<div class="nombreopcion" style="font-family: 'Montserrat', sans-serif; color: #4d5b71; padding-left: 30px; padding-right: 20px; font-size: 14px; letter-spacing: 1px; margin-bottom: 10px; float: left; text-transform: uppercase;  overflow: hidden; padding-bottom: 3px;">Inicio</div>
@@ -825,7 +826,7 @@ $( "#menudesplegable" ).animate({
 					<div class="contenedoropcion" style="padding-left: 15px; padding-right: 15px; padding-top: 10px; overflow: hidden;">
 
 						<div class="contenedoricon" style="width: 17px; height: 16px; position: absolute; margin-right: 10px; float: left;">
-							<img class="opcionicon" src="../images/plataformaconfiguracion.png?id=<?php echo $unixtime; ?>" style="width: 100%; position: absolute;" />
+							<img class="opcionicon" src="images/plataformaconfiguracion.png?id=<?php echo $unixtime; ?>" style="width: 100%; position: absolute;" />
 						</div>
 				
 						<div class="nombreopcion" style="font-family: 'Montserrat', sans-serif; color: #4d5b71; padding-left: 30px; padding-right: 20px; font-size: 14px; letter-spacing: 1px; margin-bottom: 10px; float: left; text-transform: uppercase;  overflow: hidden; padding-bottom: 3px;">Configuración</div>
@@ -844,7 +845,7 @@ $( "#menudesplegable" ).animate({
 					<div class="contenedoropcion" style="padding-left: 15px; padding-right: 15px; padding-top: 10px; overflow: hidden;">
 
 						<div class="contenedoricon" style="width: 17px; height: 16px; position: absolute; margin-right: 10px; float: left;">
-							<img class="opcionicon" src="../images/plataformacurso.png?id=<?php echo $unixtime; ?>" style="width: 100%; position: absolute;" />
+							<img class="opcionicon" src="images/plataformacurso.png?id=<?php echo $unixtime; ?>" style="width: 100%; position: absolute;" />
 						</div>
 				
 						<div class="nombreopcion" style="font-family: 'Montserrat', sans-serif; color: #4d5b71; padding-left: 30px; padding-right: 20px; font-size: 14px; letter-spacing: 1px; margin-bottom: 10px; float: left; text-transform: uppercase;  overflow: hidden; padding-bottom: 3px;">Cursos</div>
@@ -864,7 +865,7 @@ $( "#menudesplegable" ).animate({
 					<div class="contenedoropcion" style="width: calc(100% - 30px); padding-left: 15px; padding-right: 15px; padding-top: 10px; overflow: hidden;">
 
 						<div class="contenedoricon" style="width: 17px; height: 16px; position: absolute; margin-right: 10px; float: left;">
-							<img class="opcionicon" src="../images/plataformasalir.png?id=<?php echo $unixtime; ?>" style="width: 100%; position: absolute;" />
+							<img class="opcionicon" src="images/plataformasalir.png?id=<?php echo $unixtime; ?>" style="width: 100%; position: absolute;" />
 						</div>
 				
 						<div class="nombreopcion" style="font-family: 'Montserrat', sans-serif; color: #4d5b71; padding-left: 30px; padding-right: 20px; font-size: 14px; letter-spacing: 1px; margin-bottom: 10px; float: left; text-transform: uppercase;  overflow: hidden; padding-bottom: 3px;">Salir</div>
@@ -906,8 +907,8 @@ if ($totalRows_Recordset1 > 0) {
 
 ?>
       
-    <a href="../curso/index.php"><div class="curso zoom" style="width: <?php if ( $totalRows_Recordset1 == 1 ) { echo "96% !important"; } else if ( $totalRows_Recordset1 == 2 ) { echo "46%"; } ?>;">
-       <div class="imagencurso" style="background-image: url(../images/<?php echo $imagen; ?>);"></div>
+    <a href="curso/index.php"><div class="curso zoom" style="width: <?php if ( $totalRows_Recordset1 == 1 ) { echo "96% !important"; } else if ( $totalRows_Recordset1 == 2 ) { echo "46%"; } ?>;">
+       <div class="imagencurso" style="background-image: url(images/<?php echo $imagen; ?>);"></div>
            <div class="nombreCurso"><?php echo $nombre; ?></div>
            <div class="contenidoCurso"><?php echo $descripcion; ?></div>
        </div></a>
@@ -1008,7 +1009,7 @@ if ($totalRows_Recordset1 > 0) {
 	   <div id="contenido-footer" style="width:90%; float:left; margin-top: 40px; margin-left: 5%; margin-right: 5%;">
 	   
 	    	<div id="logo-footer" style="width: 260px; height: 80px;  float:left;">
-            	<img src="../images/logotipo.png" style="width: 100%;">
+            	<img src="images/logotipo.png" style="width: 100%;">
         	</div>
         	
         	<div id="linksfooterprincipales" style="float:left; margin-left: 70px; font-size: 18px; margin-bottom: 35px; font-family:'Source Sans Pro', sans-serif; line-height: 1.2px; margin-top: 40px;">

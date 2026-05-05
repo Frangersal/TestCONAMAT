@@ -1,8 +1,8 @@
 <?php session_start();
 
-require_once('../Connections/conamatenlinea.php');
+require_once('Connections/conamatenlinea.php');
 
-if ($_SESSION['sesionalumno'] != "") {
+if (isset($_SESSION['sesionalumno']) && $_SESSION['sesionalumno'] != "") {
     
     header("Location: index.php");
 }
@@ -10,6 +10,7 @@ if ($_SESSION['sesionalumno'] != "") {
 mysql_select_db($database_conamatenlinea, $conamatenlinea);
 
 $error = "";
+$matricula = "";
 
 if ($_POST){
 

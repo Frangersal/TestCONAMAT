@@ -11,7 +11,7 @@ $string = substr($md5,0,5);
 /*
 Creamos una imagen partiendo de una de fondo (debemos subir una imagen de fondo al servidor)
 */
-$captcha = imagecreatefrompng("captcha.png");
+$captcha = imagecreatefrompng(__DIR__ . "/captcha.png");
 /*
 Configuramos los colores usados para generan las lineas (formato RGB)
 */
@@ -24,7 +24,7 @@ imageline($captcha,0,5,100,59,$line);
 imageline($captcha,30,5,6,59,$line);
 imageline($captcha,120,5,74,59,$line);
 
-$font = "./verdana.ttf";
+$font = __DIR__ . "/verdana.ttf";
 
 /*
 Ahora escribimos la cadena generada aleatoriamente en la imagen
